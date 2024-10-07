@@ -9,7 +9,7 @@ const posts = await getCollection("blog", ({id}) => {
 
 ---
 
-<Layout>
+<Layout title="My blog">
     <h1>Welcome to my blog!</h1>
     {
         posts.map(post => {

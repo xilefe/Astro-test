@@ -1,0 +1,27 @@
+---
+// src/pages/es/blog/index.astro
+
+import { getCollection } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import Card from "../../../components/Card.astro";
+
+const posts = await getCollection("blog");
+
+// Filtrar solo los posts en inglés
+const spanishPosts = posts.filter(post => post.data.lang === "es");
+---
+
+<Layout title="Blog">
+    <h1>Posts del Blog</h1>
+    {spanishPosts.length > 0 ? (
+        <ul>
+            {spanishPosts.map(post => (
+                <li>
+                    <Card slug={post.slug} title={post.data.title} excerpt={post.data.excerpt} />
+                </li>
+            ))}
+        </ul>
+    ) : (
+        <p>No hay posts disponibles en español</p>
+    )}
+</Layout>
